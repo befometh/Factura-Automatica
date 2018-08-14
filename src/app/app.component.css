@@ -1,0 +1,55 @@
+@font-face{
+    font-family: "Knewave";
+    src: url("../assets/fonts/Knewave/Knewave-Regular.ttf");
+    font-style: normal;
+}
+
+@font-face{
+    font-family: "Merienda";
+    src: url("../assets/fonts/Merienda/Merienda-Regular.ttf");
+    font-style: normal;
+}
+
+@font-face{
+    font-family: "Montserrat";
+    src: url("../assets/fonts/Montserrat/Montserrat-Light.ttf");
+    font-style: normal;
+}
+
+@font-face{
+    font-family: "Playfair";
+    src: url("../assets/fonts/Playfair_Display/PlayfairDisplay-Regular.ttf");
+    font-style: normal;
+}
+
+.botonPrincipal{
+    background: #0489B1;
+    color: #ffffff;
+    padding-left: 3px;
+    font-family: "Knewave";
+    float: left;
+}
+
+.botonAceptar{
+    background: #3ADF00;
+    color: #ffffff;
+    padding-left: 3px;
+    font-family: "Merienda";
+    float: left;
+}
+
+.botonCancelar{
+    background: rgb(224, 54, 11);
+    color: #ffffff;
+    padding-left: 3px;
+    font-family: "Merienda";
+    float: left;
+}
+
+label{
+    font-family: "Playfair";
+    font-size: 20px;
+    padding-left: 3px;
+}
+
+

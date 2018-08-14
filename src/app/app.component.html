@@ -1,0 +1,84 @@
+<!--
+  Formularios de creación de usuarios dependiendo el interes del usuario
+-->
+
+<!-- Botones principales de los botones -->
+<div>
+<div class="contenedorBotones">
+  <button type="button" class="botonPrincipal" (click)="cambiarOpcion(1)">Campo de Texto</button>
+  <button type="button" class="botonPrincipal" (click)="cambiarOpcion(2)">Campo de Selección</button>
+  <button type="button" class="botonPrincipal" (click)="cambiarOpcion(3)">Botones de Radio</button>
+</div>
+<!-- Se abre el método de creación de elementos -->
+<div [hidden]="*ngIf='opcion == 4'" [ngSwitch]="opcion">
+<!-- Tipo 1 Bloques de texto -->
+  <div *ngSwitchCase="1">
+    <form action="app.component.ts" [formGroup]="forInput" [ngSubmit]="creaInput()" novalidate>
+      <input type="text" placeholder="Ingrese el Nombre del Campo" formControlName="nombre" />
+      <div *ngIf="nombre.errors && nombre.dirty">
+        <p color="red" *ngIf="nombre.errors.required">Debe Ingresar datos</p>
+        <p color="red" *ngIf="nombre.errors.pattern">El tamaño no puede superar los 50 caracteres</p>
+      </div>
+      <select name="tipoInput" id="tipoInput" #seleccion (change)="cambiarTipo(seleccion.value)">
+        <option value="1" [ngValue]="1">Texto</option>
+        <option value="2" [ngValue]="2">Numero</option>
+      </select>
+      <button type="submit" class="botonAceptar" [disabled]="ForInput.invalid">Aceptar</button>
+    </form>
+  </div>
+<!-- Tipo 2 Cuadros de selección -->
+  <div *ngSwitchCase="2">
+    <form action="updateElement" [formGroup]="forSelect" [ngSubmit]="creaSelectBut()" novalidate>
+      <input type="text" placeholder="Ingrese el Nombre del Campo" formControlName="nombre" />
+      <div *ngIf="nombre.errors && nombre.dirty">
+        <p color="red" *ngIf="nombre.errors.required">Debe Ingresar datos</p>
+        <p color="red" *ngIf="nombre.errors.pattern">El tamaño no puede superar los 50 caracteres</p>
+      </div>
+      <input type="text" placeholder="Ingrese el número de opciones (Máx. 12)" formControlName="cantidad" />
+      <div *ngIf="cantidad.errors && cantidad.dirty">
+        <p color="red" *ngIf="cantidad.errors.required">Debe Ingresar datos</p>
+        <p color="red" *ngIf="cantidad.errors.pattern">El tamaño debe estar en un rango entre 1 - 12, debe contener numeros enteros</p>
+      </div>
+      <button type="submit" [disabled]="forSelect.invalid">Aceptar</button>
+    </form>
+  </div>
+<!-- Tipo 3 Botones radiales -->
+  <div *ngSwitchCase="3">
+    <form action="app.component.ts" [formGroup]="forRadio" [ngSubmit]="crearRadioBut()" novalidate>
+      <input type="text" placeholder="Ingrese el Nombre del Campo" formControlName="nombre" />
+      <div *ngIf="nombre.errors && nombre.dirty">
+        <p color="red" *ngIf="nombre.errors.required">Debe Ingresar datos</p>
+        <p color="red" *ngIf="nombre.errors.pattern">El tamaño no puede superar los 50 caracteres</p>
+      </div>
+      <input type="text" placeholder="Ingrese el número de opciones (Máx. 12)" formControlName="cantidad" />
+      <div *ngIf="cantidad.errors && cantidad.dirty">
+        <p color="red" *ngIf="cantidad.errors.required">Debe Ingresar datos</p>
+        <p color="red" *ngIf="cantidad.errors.pattern">El tamaño debe estar en un rango entre 1 - 12, debe contener numeros enteros</p>
+      </div>
+      <button type="submit" [disabled]="forRadio.invalid">Aceptar</button>
+    </form>
+  </div>
+<!-- Botón que cancela el envío del formulario -->
+  <div *ngSwitchDefault>
+    <button type="reset" class="botonCancelar" (click)="cancelar()">Cancelar</button>
+  </div>
+</div>
+<!-- Vista previa del formulario creado por el usuario -->
+<fieldset>
+  <legend>Vista Previa</legend>
+  <div *ngFor="let linea of factura" [ngSwitch]="linea.elemento">
+    <div *ngSwitchCase="1">
+      <label>{{linea.nombre}}</label>
+      <input type="{{linea.tipo}}" readonly/>
+    </div>
+    <div *ngSwitchCase="2">
+      <label>{{linea.nombre}}</label>
+      <input placeholder="{{linea.cantidad}}" readonly/>
+    </div>
+    <div *ngSwitchCase="3">
+      <label>{{linea.nombre}}</label>
+      <input placeholder="{{linea.cantidad}}" readonly/>
+    </div>
+  </div>
+</fieldset>
+</div>
